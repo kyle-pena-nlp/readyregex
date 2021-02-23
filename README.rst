@@ -31,7 +31,31 @@ Features
 --------
 
 * TODO
+--------
+Common Regexes and Variations
+#no one-size-fits all regex solution
 
+    Validation of Email addresses:
+        Email_Simple
+        """ validates if string contains a "@" preceded or followed by characters:"""
+        ^\S+@\S+$
+        
+        Email_Simple(character_restrictions=True)
+        """restricted to characters allowed in domain names"""
+        ^[A-Z0-9+_.-]+@[A-Z0-9.-]+$
+        
+        Email_Simple(dot_checker=True)
+        """no consecutive dots, first and last characters cant be dots"""
+        ^[A-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[A-Z0-9.-]+$
+
+        Email_Simple(domain_name=True)
+        """top level domain level must be have between 2 to 6 characters i.e .uk"""
+
+        Email_Simple(common_domain_name=True)
+        "only allows common domain names: com|net|org|edu|gov
+        Can also use https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains"
+        
+       
 Credits
 -------
 
