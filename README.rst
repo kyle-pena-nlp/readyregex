@@ -162,8 +162,21 @@ Common Regexes and Variations
         """ISO 8601 Date and timeformat"
         #more on this
 
+...
      Validation of text length
      Validation of Numbers of lines in text
+     URLs
+     IP Addresses
+     HTML Tags
+     Adresses
+     File Paths
+     PassportNumbers
+     Username(similar to password)
+     
+     SuperBasicPackage:
+      Alphanumeric(with space, without, no numbers)
+      Digits(type= Whole, Decimal, Negative, Fraction... Combinations)
+     
      #more on this
      
 Credits
