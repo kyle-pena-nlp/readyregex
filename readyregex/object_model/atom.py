@@ -1,10 +1,10 @@
 from abc import ABC
 from dataclasses import dataclass
-from addable import Addable
-from character_class import CharacterSetItem
+from concatenatable import Concatenatable
+from character_set_item import CharacterSetItem
 
 @dataclass
-class Atom(Addable, CharacterSetItem, ABC):
+class Atom(Concatenatable, CharacterSetItem, ABC):
     pass
 
     

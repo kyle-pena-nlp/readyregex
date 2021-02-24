@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from addable import Addable
+from concatenatable import Concatenatable
 
 @dataclass
-class EmptyPattern(Addable):
+class EmptyPattern(Concatenatable):
 
     def regex(self):
         return ""

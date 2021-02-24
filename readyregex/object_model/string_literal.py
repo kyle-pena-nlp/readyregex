@@ -1,9 +1,9 @@
 import re
-from addable import Addable
+from concatenatable import Concatenatable
 from dataclasses import dataclass
 
 @dataclass
-class StringLiteral(Addable):
+class StringLiteral(Concatenatable):
 
     regex_escaped_string : str
     

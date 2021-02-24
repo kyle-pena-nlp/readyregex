@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from pattern import Pattern
 
 @dataclass
-class AddableBase(Pattern, ABC):
+class ConcatenatableBase(Pattern, ABC):
     
     def _get_content_array(self):
-        return getattr(self, "addables")  if hasattr(self, "addables")  else [ self ]
+        return getattr(self, "concatenatables")  if hasattr(self, "concatenatables")  else [ self ]

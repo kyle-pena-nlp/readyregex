@@ -1,10 +1,11 @@
 from pattern import Pattern
-from addable import Addable
+from concatenatable import Concatenatable
 from dataclasses import dataclass
 import re
 
 @dataclass
-class RegexLiteral(Addable):
+class RegexLiteral(Concatenatable):
+    
     regex_string : str
 
     def __post_init__(self, regex_string):

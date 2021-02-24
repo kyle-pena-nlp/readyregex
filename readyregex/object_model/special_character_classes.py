@@ -1,12 +1,21 @@
 from dataclasses import dataclass
 from enum import Enum
+from concatenatable import Concatenatable
+from character_set_item import CharacterSetItem
 
 @dataclass
-class SpecialCharacterClassInfo:
-    value : int
-    regex : str
+class _SpecialCharacterClass(Concatenatable, CharacterSetItem):
 
-_S = SpecialCharacterClassInfo
+    enum_value : int
+    regex_value : str
+
+    def regex(self):
+        return self.regex_value
+
+    def character_set_regex(self):
+        return self.regex_value
+
+_S = _SpecialCharacterClass
 
 class SpecialCharacterClasses(Enum):
 

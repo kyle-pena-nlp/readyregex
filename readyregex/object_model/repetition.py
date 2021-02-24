@@ -2,12 +2,14 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Set, Tuple, Sequence, Union, Any
 from enum import Enum
-from pattern import Pattern
+from concatenatable import Concatenatable
+from surroundable_mixin import SurroundableMixin
 
 
 @dataclass
-class Repetition(Pattern):
-    content : Pattern
+class Repetition(Concatenatable, SurroundableMixin):
+    
+    content : Concatenatable
     lb : Union[None,int]
     ub : Union[None,int]
     

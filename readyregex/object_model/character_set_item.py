@@ -1,6 +1,9 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
 @dataclass
 class CharacterSetItem(ABC):
-    pass
+    
+    @abstractmethod
+    def character_set_regex(self) -> str:
+        pass
