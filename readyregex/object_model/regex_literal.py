@@ -1,16 +1,15 @@
-from pattern import Pattern
-from concatenatable import Concatenatable
-from dataclasses import dataclass
 import re
+from dataclasses import dataclass
+from .pattern import Pattern
+from .concatenatable_mixin import ConcatenatableMixin
 
 @dataclass
-class RegexLiteral(Concatenatable):
-    
+class RegexLiteral(ConcatenatableMixin):
+
     regex_string : str
 
-    def __post_init__(self, regex_string):
-        assert RegexLiteral.is_valid_regex(regex_string)
-        self.regex_string = regex_string
+    def __post_init__(self):
+        assert RegexLiteral.is_valid_regex(self.regex_string)
 
     @staticmethod
     def is_valid_regex(string):

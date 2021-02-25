@@ -10,8 +10,8 @@ class Options(enum.Flag):
     AreaCode     = enum.auto()
     DashSeparators  = enum.auto()
     SpaceSeparators = enum.auto()
+    OptionalSeparators = enum.auto()    
     AreaCodeParentheses = enum.auto()
-
 
     # Global Options
     #IgnoreCase = enum.auto()

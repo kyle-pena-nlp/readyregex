@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from enum import Enum
-from concatenatable import Concatenatable
-from character_set_item import CharacterSetItem
+from .concatenatable_mixin import ConcatenatableMixin
+from .character_set_item import CharacterSetItem
 
 @dataclass
-class _SpecialCharacterClass(Concatenatable, CharacterSetItem):
+class _SpecialCharacterClass(ConcatenatableMixin, CharacterSetItem):
 
     enum_value : int
     regex_value : str

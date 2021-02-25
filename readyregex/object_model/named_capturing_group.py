@@ -2,13 +2,13 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Set, Tuple, Sequence, Union, Any
 from enum import Enum
-from concatenatable import Concatenatable
-from surroundable_mixin import SurroundableMixin
+from .concatenatable_mixin import ConcatenatableMixin
+from .surroundable_mixin import SurroundableMixin
 
 @dataclass
-class NamedCapturingGroup(Concatenatable, SurroundableMixin):
+class NamedCapturingGroup(ConcatenatableMixin, SurroundableMixin):
     name : str
-    content : Concatenatable
+    content : ConcatenatableMixin
 
     def regex(self):
         return "(?P<{}>{})".format(self.name, self.content.regex())

@@ -1,16 +1,15 @@
 import re
 from dataclasses import dataclass
-from concatenatable import Concatenatable
-from character_set_item import CharacterSetItem
+from .concatenatable_mixin import ConcatenatableMixin
+from .character_set_item import CharacterSetItem
 
 @dataclass
-class Character(Concatenatable, CharacterSetItem):
+class Character(ConcatenatableMixin, CharacterSetItem):
     
     value : str
 
-    def __post_init__(self, value : str):
-        assert len(value) == 1
-        self.value = value
+    def __post_init__(self):
+        assert len(self.value) == 1
 
     def regex(self):
         return re.escape(self.value)

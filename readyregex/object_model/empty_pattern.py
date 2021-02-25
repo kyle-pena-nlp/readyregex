@@ -1,8 +1,8 @@
 from dataclasses import dataclass
-from concatenatable import Concatenatable
+from .concatenatable_mixin import ConcatenatableMixin
 
 @dataclass
-class EmptyPattern(Concatenatable):
+class EmptyPattern(ConcatenatableMixin):
 
     def regex(self):
         return ""

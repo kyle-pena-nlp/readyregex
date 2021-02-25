@@ -1,36 +1,36 @@
 from dataclasses import dataclass, field
-from ..object_model.character_set import CharacterSet
-from ..object_model.special_character_classes import SpecialCharacterClasses
-from ..object_model.optional import Optional
-from ..object_model.character import Character
-from ..object_model.digits import Digits
-from ..object_model.concatenatable import Concatenatable
-from ..object_model.empty_pattern import EmptyPattern
-from ..options import Options
+from readyregex.object_model.character_set import CharacterSet
+from readyregex.object_model.optional import Optional
+from readyregex.object_model.character import Character
+from readyregex.object_model.digits import Digits
+from readyregex.object_model.concatenatable_mixin import ConcatenatableMixin
+from readyregex.object_model.empty_pattern import EmptyPattern
+from readyregex.options import Options
 
-
-from ..object_model.concatenatable_sequence import ConcatenatableSequence
 
 @dataclass
-class PhoneNumber(Concatenatable):
+class PhoneNumber(ConcatenatableMixin):
 
-    options : Options
+    options : Options = None
 
     @staticmethod
     def DEFAULT_PHONE_NUMBER_OPTIONS():
         return Options.AreaCode & Options.DashSeparators & Options.SpaceSeparators
 
-    def __post_init__(self, options):
-        if not options:
+    def __post_init__(self):
+        if not self.options:
             self.options = PhoneNumber.DEFAULT_PHONE_NUMBER_OPTIONS()
         else:
-            self.options = options
+            self.options = self.options
 
     def regex(self):  
 
         pattern = EmptyPattern()
-
+        
         separators = CharacterSet([ Character("-"), Character(" ") ])
+
+        if (self.options & Options.OptionalSeparators):
+            separators = Optional(separators)
 
         if (self.options & Options.OptionalAreaCode):
             pattern += Optional(Digits(3) + separators)
@@ -39,6 +39,6 @@ class PhoneNumber(Concatenatable):
 
         pattern += Digits(3) + separators + Digits(4)
 
-        return pattern
+        return pattern.regex()
 
     

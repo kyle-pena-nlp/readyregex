@@ -1,20 +1,18 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Set, Tuple, Sequence, Union, Any
-from enum import Enum
-from concatenatable import Concatenatable
-from character_set_item import CharacterSetItem
-from character import Character
+from typing import Sequence, Union
+from .concatenatable_mixin import ConcatenatableMixin
+from .character_set_item import CharacterSetItem
+from .character import Character
 
 @dataclass
-class CharacterSet(Concatenatable):
+class CharacterSet(ConcatenatableMixin):
     
-    positives: list[Union[CharacterSetItem, str]] = field(default_factory = list)
-    negatives: list[Union[CharacterSetItem, str]] = field(default_factory = list)
+    positives: Sequence[Union[CharacterSetItem, str]] = field(default_factory = list)
+    negatives: Sequence[Union[CharacterSetItem, str]] = field(default_factory = list)
 
-    def __post_init__(self, positives, negatives):
-        self.positives = [ Character(item) if isinstance(item,str) else item for item in positives ]
-        self.negatives = [ Character(item) if isinstance(item,str) else item for item in negatives ]
+    def __post_init__(self):
+        self.positives = [ Character(item) if isinstance(item,str) else item for item in self.positives ]
+        self.negatives = [ Character(item) if isinstance(item,str) else item for item in self.negatives ]
 
     def regex(self):
         

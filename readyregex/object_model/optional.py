@@ -1,11 +1,11 @@
 from dataclasses import dataclass
-from concatenatable import Concatenatable
-from surroundable_mixin import SurroundableMixin
+from .concatenatable_mixin import ConcatenatableMixin
+from .surroundable_mixin import SurroundableMixin
 
 @dataclass
-class Optional(Concatenatable, SurroundableMixin):
+class Optional(ConcatenatableMixin, SurroundableMixin):
 
-    content: Concatenatable
+    content: ConcatenatableMixin
 
     def regex(self):
         return "({})?".format(self.content.regex())

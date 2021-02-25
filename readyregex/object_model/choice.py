@@ -1,12 +1,12 @@
 from dataclasses import dataclass, field
-from concatenatable import Concatenatable
 from typing import Sequence
 from pattern import Pattern
+from .concatenatable_mixin import ConcatenatableMixin
 
 @dataclass
-class Choice(Concatenatable):
+class Choice(ConcatenatableMixin):
 
-    choices : list[Pattern] = field(default_factory = list)
+    choices : Sequence[Pattern] = field(default_factory = list)
 
     def regex(self):
         return "|".join("({})".format(choice.regex()) for choice in self.choices)

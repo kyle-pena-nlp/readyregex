@@ -2,24 +2,21 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Set, Tuple, Sequence, Union, Any
 from enum import Enum
-from concatenatable import Concatenatable
-from surroundable_mixin import SurroundableMixin
+from .concatenatable_mixin import ConcatenatableMixin
+from .surroundable_mixin import SurroundableMixin
 
 
 @dataclass
-class Repetition(Concatenatable, SurroundableMixin):
-    
-    content : Concatenatable
+class Repetition(ConcatenatableMixin, SurroundableMixin):
+
+    content : ConcatenatableMixin
     lb : Union[None,int]
     ub : Union[None,int]
     
-    def __post_init__(self, content, lb, ub):
-        assert lb is None or lb >= 0
-        assert ub is None or ub >= 1
-        assert (lb is None or ub is None) or (lb <= ub)
-        self.content = content
-        self.lb = lb
-        self.ub = ub
+    def __post_init__(self):
+        assert self.lb is None or self.lb >= 0
+        assert self.ub is None or self.ub >= 1
+        assert (self.lb is None or self.ub is None) or (self.lb <= self.ub)
     
     def regex(self):
         # Optional
