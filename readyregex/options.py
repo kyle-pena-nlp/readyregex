@@ -6,12 +6,17 @@ class Options(enum.Flag):
     Default = enum.auto()
     
     # Phone Number Options
-    OptionalAreaCode = enum.auto()
-    AreaCode     = enum.auto()
-    DashSeparators  = enum.auto()
-    SpaceSeparators = enum.auto()
-    OptionalSeparators = enum.auto()    
-    AreaCodeParentheses = enum.auto()
+    MandatoryAreaCodeParentheses = enum.auto()
+    NoAreaCodeParentheses = enum.auto()
+    OptionalAreaCode    = enum.auto()
+    NoAreaCode          = enum.auto()
+    OnlyDashSeparators  = enum.auto()
+    OnlySpaceSeparators = enum.auto()    
+    NoSeparators        = enum.auto()
+    OptionalSeparators  = enum.auto()    
+
+    # General Options
+    IgnoreExtraWhitespace = enum.auto()
 
     # Global Options
     #IgnoreCase = enum.auto()

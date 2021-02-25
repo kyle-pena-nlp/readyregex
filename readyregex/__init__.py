@@ -6,3 +6,4 @@ __version__ = '0.0.1'
 
 from .common_regex import *
 from .object_model import *
+from .options import Options

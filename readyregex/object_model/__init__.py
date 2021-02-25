@@ -8,3 +8,7 @@ from .optional import Optional
 from .regex_literal import RegexLiteral
 from .special_character_classes import SpecialCharacterClasses
 from .string_literal import StringLiteral
+
+# do not expose in top-level module's __init__.py
+from .pattern import Pattern
+from .concatenatable_mixin import ConcatenatableMixin

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from typing import Union
+from typing import Union, Sequence
 from .pattern import Pattern
 from .concatenatable_sequence import ConcatenatableSequence
 from .concatenatable_base import ConcatenatableBase
@@ -16,6 +16,15 @@ class ConcatenatableMixin(ConcatenatableBase, ABC):
 
     def __add__(self, other : ConcatenatableBase) -> ConcatenatableSequence:
         return self.add(other)
+
+    def join(self, others : Sequence[ConcatenatableBase]) -> ConcatenatableSequence:
+        parts = []
+        for i, part in enumerate(parts):
+            parts.append(part)
+            if i < i-1:
+                parts.append(self)
+        return ConcatenatableSequence(parts)
+
 
 
 

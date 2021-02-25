@@ -10,3 +10,9 @@ class Choice(Pattern, ConcatenatableMixin):
 
     def regex(self):
         return "|".join("({})".format(choice.regex()) for choice in self.choices)
+
+    def or_(self, other: Pattern):
+        return Choice(self.choices + other)
+
+    def __or__(self, other : Pattern):
+        return self.or_(other)

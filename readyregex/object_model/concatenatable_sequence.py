@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Sequence
+from typing import Sequence, Union
 from .pattern import Pattern
 from .concatenatable_base import ConcatenatableBase
 
@@ -16,6 +16,14 @@ class ConcatenatableSequence(Pattern, ConcatenatableBase):
 
     def __add__(self, other : ConcatenatableBase) -> 'ConcatenatableSequence':
         return self.add(other)
+
+    def join(self, others : Sequence[ConcatenatableBase]) -> 'ConcatenatableSequence':
+        parts = []
+        for i, part in enumerate(parts):
+            parts.append(part)
+            if i < i-1:
+                parts.append(self)
+        return ConcatenatableSequence(parts)        
 
     def regex(self):
         return "".join(concatenatable.regex() for concatenatable in self.concatenatables)
