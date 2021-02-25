@@ -1,10 +1,10 @@
 from dataclasses import dataclass, field
 from typing import Sequence
-from pattern import Pattern
+from .pattern import Pattern
 from .concatenatable_mixin import ConcatenatableMixin
 
 @dataclass
-class Choice(ConcatenatableMixin):
+class Choice(Pattern, ConcatenatableMixin):
 
     choices : Sequence[Pattern] = field(default_factory = list)
 

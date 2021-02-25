@@ -4,10 +4,11 @@ from typing import Set, Tuple, Sequence, Union, Any
 from enum import Enum
 from .concatenatable_mixin import ConcatenatableMixin
 from .surroundable_mixin import SurroundableMixin
+from .pattern import Pattern
 
 
 @dataclass
-class Repetition(ConcatenatableMixin, SurroundableMixin):
+class Repetition(Pattern, ConcatenatableMixin, SurroundableMixin):
 
     content : ConcatenatableMixin
     lb : Union[None,int]

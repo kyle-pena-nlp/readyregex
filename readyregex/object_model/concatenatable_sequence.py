@@ -4,7 +4,7 @@ from .pattern import Pattern
 from .concatenatable_base import ConcatenatableBase
 
 @dataclass
-class ConcatenatableSequence(ConcatenatableBase, Pattern):
+class ConcatenatableSequence(Pattern, ConcatenatableBase):
     
     concatenatables : Sequence[ConcatenatableBase] = field(default_factory = list)
 

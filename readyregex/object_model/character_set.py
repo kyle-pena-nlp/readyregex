@@ -3,9 +3,10 @@ from typing import Sequence, Union
 from .concatenatable_mixin import ConcatenatableMixin
 from .character_set_item import CharacterSetItem
 from .character import Character
+from .pattern import Pattern
 
 @dataclass
-class CharacterSet(ConcatenatableMixin):
+class CharacterSet(Pattern, ConcatenatableMixin):
     
     positives: Sequence[Union[CharacterSetItem, str]] = field(default_factory = list)
     negatives: Sequence[Union[CharacterSetItem, str]] = field(default_factory = list)

@@ -2,9 +2,10 @@ import re
 from dataclasses import dataclass
 from .pattern import Pattern
 from .concatenatable_mixin import ConcatenatableMixin
+from .pattern import Pattern
 
 @dataclass
-class RegexLiteral(ConcatenatableMixin):
+class RegexLiteral(Pattern, ConcatenatableMixin):
 
     regex_string : str
 

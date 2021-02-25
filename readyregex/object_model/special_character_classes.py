@@ -2,9 +2,10 @@ from dataclasses import dataclass
 from enum import Enum
 from .concatenatable_mixin import ConcatenatableMixin
 from .character_set_item import CharacterSetItem
+from .pattern import Pattern
 
 @dataclass
-class _SpecialCharacterClass(ConcatenatableMixin, CharacterSetItem):
+class _SpecialCharacterClass(Pattern, ConcatenatableMixin, CharacterSetItem):
 
     enum_value : int
     regex_value : str

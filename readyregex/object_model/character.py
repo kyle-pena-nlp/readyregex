@@ -2,9 +2,10 @@ import re
 from dataclasses import dataclass
 from .concatenatable_mixin import ConcatenatableMixin
 from .character_set_item import CharacterSetItem
+from .pattern import Pattern
 
 @dataclass
-class Character(ConcatenatableMixin, CharacterSetItem):
+class Character(Pattern, ConcatenatableMixin, CharacterSetItem):
     
     value : str
 

@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 from .concatenatable_mixin import ConcatenatableMixin
+from .pattern import Pattern
 
 @dataclass
-class Digits(ConcatenatableMixin):
+class Digits(Pattern, ConcatenatableMixin):
 
     number : int
 

@@ -1,9 +1,10 @@
 from dataclasses import dataclass
 from .concatenatable_mixin import ConcatenatableMixin
 from .surroundable_mixin import SurroundableMixin
+from .pattern import Pattern
 
 @dataclass
-class Optional(ConcatenatableMixin, SurroundableMixin):
+class Optional(Pattern, ConcatenatableMixin, SurroundableMixin):
 
     content: ConcatenatableMixin
 

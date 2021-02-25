@@ -4,9 +4,10 @@ from typing import Set, Tuple, Sequence, Union, Any
 from enum import Enum
 from .concatenatable_mixin import ConcatenatableMixin
 from .surroundable_mixin import SurroundableMixin
+from .pattern import Pattern
 
 @dataclass
-class NamedCapturingGroup(ConcatenatableMixin, SurroundableMixin):
+class NamedCapturingGroup(Pattern, ConcatenatableMixin, SurroundableMixin):
     name : str
     content : ConcatenatableMixin
 
