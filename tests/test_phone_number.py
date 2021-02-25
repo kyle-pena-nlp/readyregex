@@ -7,10 +7,6 @@ import pytest
 from readyregex import *
 
 @pytest.fixture
-def A_Z_range_pattern():
-    return CharacterRange("A", "Z")
-
-@pytest.fixture
 def basic_phone_number():
     return PhoneNumber()
 
