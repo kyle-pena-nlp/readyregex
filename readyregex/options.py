@@ -10,8 +10,8 @@ class Options(enum.Flag):
     NoAreaCodeParentheses = enum.auto()
     OptionalAreaCode    = enum.auto()
     NoAreaCode          = enum.auto()
-    OnlyDashSeparators  = enum.auto()
-    OnlySpaceSeparators = enum.auto()    
+    SingleDashSeparators  = enum.auto()
+    SingleSpaceSeparators = enum.auto()    
     NoSeparators        = enum.auto()
     OptionalSeparators  = enum.auto()    
 

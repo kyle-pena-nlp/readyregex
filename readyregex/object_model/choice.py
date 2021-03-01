@@ -2,14 +2,18 @@ from dataclasses import dataclass, field
 from typing import Sequence
 from .pattern import Pattern
 from .concatenatable_mixin import ConcatenatableMixin
+from .string_literal import StringLiteral
 
 @dataclass
 class Choice(Pattern, ConcatenatableMixin):
 
     choices : Sequence[Pattern] = field(default_factory = list)
 
+    def __post_init__(self):
+        self.choices = [ StringLiteral(item) if isinstance(item,str) else item for item in self.choices ]
+
     def regex(self):
-        return "|".join("({})".format(choice.regex()) for choice in self.choices)
+        return "({})".format("|".join("({})".format(choice.regex()) for choice in self.choices))
 
     def or_(self, other: Pattern):
         return Choice(self.choices + other)

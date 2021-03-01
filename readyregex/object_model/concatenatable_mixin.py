@@ -19,9 +19,9 @@ class ConcatenatableMixin(ConcatenatableBase, ABC):
 
     def join(self, others : Sequence[ConcatenatableBase]) -> ConcatenatableSequence:
         parts = []
-        for i, part in enumerate(parts):
+        for i, part in enumerate(others):
             parts.append(part)
-            if i < i-1:
+            if i < len(others) - 1:
                 parts.append(self)
         return ConcatenatableSequence(parts)
 

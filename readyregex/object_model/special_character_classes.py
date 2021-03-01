@@ -18,7 +18,7 @@ class _SpecialCharacterClass(Pattern, ConcatenatableMixin, CharacterSetItem):
 
 _S = _SpecialCharacterClass
 
-class SpecialCharacterClasses(Enum):
+class SpecialCharacterClasses:
 
     ALL                         = _S(1, r".")
     DIGITS                      = _S(2, r"\d")
