@@ -20,7 +20,7 @@ _S = _SpecialCharacterClass
 
 class SpecialCharacterClasses:
 
-    ALL                         = _S(1, r".")
+    ANY_CHARACTER               = _S(1, r".")
     DIGITS                      = _S(2, r"\d")
     NON_DIGITS                  = _S(3, r"\D")
     WHITESPACE                  = _S(4, r"\s")

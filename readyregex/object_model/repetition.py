@@ -5,7 +5,7 @@ from enum import Enum
 from .concatenatable_mixin import ConcatenatableMixin
 from .surroundable_mixin import SurroundableMixin
 from .pattern import Pattern
-
+from ..ready_regex_exception import ReadyRegexException
 
 @dataclass
 class Repetition(Pattern, ConcatenatableMixin, SurroundableMixin):
@@ -15,9 +15,14 @@ class Repetition(Pattern, ConcatenatableMixin, SurroundableMixin):
     ub : Union[None,int]
     
     def __post_init__(self):
-        assert self.lb is None or self.lb >= 0
-        assert self.ub is None or self.ub >= 1
-        assert (self.lb is None or self.ub is None) or (self.lb <= self.ub)
+        if not (self.lb is None or self.lb >= 0):
+            raise ReadyRegexException("lb must be None or non-negative, was {}".format(self.lb))
+
+        if not (self.ub is None or self.ub >= 1):
+            raise ReadyRegexException("ub must be None or at least one, was {}".format(self.ub))
+
+        if not ((self.lb is None or self.ub is None) or (self.lb <= self.ub)):
+            raise ReadyRegexException("either lb or ub must be none, or lb must be less than or equal to ub.  Was {} and {}, respectively".format(self.lb, self.ub))
     
     def regex(self):
         # Optional

@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from .concatenatable_mixin import ConcatenatableMixin
 from .character_set_item import CharacterSetItem
 from .pattern import Pattern
+from ..ready_regex_exception import ReadyRegexException
 
 @dataclass
 class Character(Pattern, ConcatenatableMixin, CharacterSetItem):
@@ -10,7 +11,8 @@ class Character(Pattern, ConcatenatableMixin, CharacterSetItem):
     value : str
 
     def __post_init__(self):
-        assert len(self.value) == 1
+        if len(self.value) != 1:
+            raise ReadyRegexException("Not a character: '{}'".format(self.value))
 
     def regex(self):
         return re.escape(self.value)
