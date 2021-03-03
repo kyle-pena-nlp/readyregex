@@ -14,6 +14,7 @@ class CharacterSet(Pattern, ConcatenatableMixin):
     def __post_init__(self):
         self.positives = [ Character(item) if isinstance(item,str) else item for item in self.positives ]
         self.negatives = [ Character(item) if isinstance(item,str) else item for item in self.negatives ]
+        self._validate_types()
 
     def regex(self):
         

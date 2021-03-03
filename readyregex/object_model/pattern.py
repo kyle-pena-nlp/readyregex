@@ -1,11 +1,16 @@
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fields
 from typing import Dict, Any, Set
 import re, logging, sys, json
+from .type_hint_validation_mixin import TypeHintValidationMixin
+from ..ready_regex_exception import ReadyRegexException
 from ..options import Options
 
 @dataclass
-class Pattern(ABC):
+class Pattern(ABC, TypeHintValidationMixin):
+
+    def __post_init__(self):
+        self._validate_types()
 
     @abstractmethod
     def regex(self):

@@ -10,6 +10,7 @@ class StringLiteral(Pattern, ConcatenatableMixin):
     
     def __post_init__(self):
         self.regex_escaped_string = re.escape(self.regex_escaped_string)
+        self._validate_types()
 
     def regex(self):
         return self.regex_escaped_string

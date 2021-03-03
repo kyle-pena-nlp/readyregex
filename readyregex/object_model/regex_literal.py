@@ -14,6 +14,7 @@ class RegexLiteral(Pattern, ConcatenatableMixin):
         valid, error = RegexLiteral.is_valid_regex(self.regex_string)
         if not valid:
             raise ReadyRegexException("regex_string was not a valid regex string, was: '{}' ({} @ chr idx {})".format(self.regex_string, error.msg, error.pos))
+        self._validate_types()
 
     @staticmethod
     def is_valid_regex(string):

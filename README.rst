@@ -19,7 +19,6 @@ readyregex
      :alt: Updates
 
 
-
 readyregex contains a wide range of customizable and ready-made regex patterns for everyday use
 
 

@@ -19,6 +19,7 @@ class NamedCapturingGroup(Pattern, ConcatenatableMixin, SurroundableMixin):
             raise ReadyRegexException("name must start with a letter, was '{}'".format(self.name))
         elif self.name.isalnum():
             raise ReadyRegexException("name must consist solely of alphanumeric characters, was '{}'".format(self.name))
+        self._validate_types()
 
     def regex(self):
         return "(?P<{}>{})".format(self.name, self.content.regex())

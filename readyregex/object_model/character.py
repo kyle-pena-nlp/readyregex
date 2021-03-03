@@ -13,6 +13,7 @@ class Character(Pattern, ConcatenatableMixin, CharacterSetItem):
     def __post_init__(self):
         if len(self.value) != 1:
             raise ReadyRegexException("Not a character: '{}'".format(self.value))
+        self._validate_types()
 
     def regex(self):
         return re.escape(self.value)

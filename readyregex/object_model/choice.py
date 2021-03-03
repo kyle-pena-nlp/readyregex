@@ -11,6 +11,7 @@ class Choice(Pattern, ConcatenatableMixin):
 
     def __post_init__(self):
         self.choices = [ StringLiteral(item) if isinstance(item,str) else item for item in self.choices ]
+        self._validate_types()
 
     def regex(self):
         return "({})".format("|".join("({})".format(choice.regex()) for choice in self.choices))

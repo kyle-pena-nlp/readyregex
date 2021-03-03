@@ -35,3 +35,13 @@ def test_latin_1_supplement_character_range_pattern(latin_1_supplement_character
     assert latin_1_supplement_character_range_pattern.match("9")
     assert latin_1_supplement_character_range_pattern.match("{")
     assert latin_1_supplement_character_range_pattern.match("é")
+
+def test_non_character_input_raises_exception():
+    with pytest.raises(ReadyRegexException):
+        CharacterRange("ab", "c")
+    with pytest.raises(ReadyRegexException):
+        CharacterRange("a", "bc")     
+
+def test_character_range_must_be_in_order():
+    with pytest.raises(ReadyRegexException):
+        CharacterRange("z", "a")  
