@@ -9,7 +9,7 @@ class TypeHintValidationMixin:
     def _validate_types(self):
         type_errors = []
         for field in fields(self):
-            print(field.name)
+            #print(field.name)
             attr = getattr(self, field.name)
             try:
                 typeguard.check_type(field.name, attr, field.type)
