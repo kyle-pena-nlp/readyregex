@@ -4,7 +4,7 @@ from .pattern import Pattern
 from ..ready_regex_exception import ReadyRegexException
 
 @dataclass
-class Digits(Pattern, ConcatenatableMixin):
+class Digits(Pattern, ConcatenatableMixin, RepetitionMixin):
 
     number : int
 

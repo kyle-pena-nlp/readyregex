@@ -2,16 +2,17 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Set, Tuple, Sequence, Union, Any
 from enum import Enum
-from .concatenatable_mixin import ConcatenatableMixin
+from .concatenatable_base import ConcatenatableBase
 from .surroundable_mixin import SurroundableMixin
 from .pattern import Pattern
 from .string_literal import StringLiteral
+from .concatenatable_mixin import ConcatenatableMixin
 from ..ready_regex_exception import ReadyRegexException
 
 @dataclass
 class Repetition(Pattern, ConcatenatableMixin, SurroundableMixin):
 
-    content : ConcatenatableMixin
+    content : ConcatenatableBase
     lb : Union[None,int]
     ub : Union[None,int]
     

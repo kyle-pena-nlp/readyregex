@@ -2,15 +2,16 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import Set, Tuple, Sequence, Union, Any
 from enum import Enum
+from .concatenatable_base import ConcatenatableBase
 from .concatenatable_mixin import ConcatenatableMixin
 from .surroundable_mixin import SurroundableMixin
 from .pattern import Pattern
 from ..ready_regex_exception import ReadyRegexException
 
 @dataclass
-class NamedCapturingGroup(Pattern, ConcatenatableMixin, SurroundableMixin):
+class NamedCapturingGroup(Pattern, ConcatenatableMixin, RepetitionMixin, SurroundableMixin):
     name : str
-    content : ConcatenatableMixin
+    content : ConcatenatableBase
 
     def __post_init__(self):
         if len(self.name) == 0:

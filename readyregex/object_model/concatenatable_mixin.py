@@ -14,10 +14,10 @@ class ConcatenatableMixin(ConcatenatableBase, ABC):
     def add(self, other : ConcatenatableBase) -> ConcatenatableSequence:
         return ConcatenatableSequence(self._get_content_array() + other._get_content_array())
 
-    def __add__(self, other : ConcatenatableBase) -> ConcatenatableSequence:
+    def __add__(self, other : ConcatenatableBase) -> ConcatenatableBase:
         return self.add(other)
 
-    def join(self, others : Sequence[ConcatenatableBase]) -> ConcatenatableSequence:
+    def join(self, others : Sequence[ConcatenatableBase]) -> ConcatenatableBase:
         parts = []
         for i, part in enumerate(others):
             parts.append(part)

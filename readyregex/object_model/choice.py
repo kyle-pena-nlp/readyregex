@@ -5,7 +5,7 @@ from .concatenatable_mixin import ConcatenatableMixin
 from .string_literal import StringLiteral
 
 @dataclass
-class Choice(Pattern, ConcatenatableMixin):
+class Choice(Pattern, ConcatenatableMixin, RepetitionMixin):
 
     choices : Sequence[Pattern] = field(default_factory = list)
 

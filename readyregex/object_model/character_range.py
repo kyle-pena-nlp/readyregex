@@ -6,7 +6,7 @@ from .concatenatable_mixin import ConcatenatableMixin
 from ..ready_regex_exception import ReadyRegexException
 
 @dataclass
-class CharacterRange(Pattern, ConcatenatableMixin, CharacterSetItem):
+class CharacterRange(Pattern, ConcatenatableMixin, RepetitionMixin, CharacterSetItem):
 
     start : str
     end : str

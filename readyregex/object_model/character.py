@@ -6,7 +6,7 @@ from .pattern import Pattern
 from ..ready_regex_exception import ReadyRegexException
 
 @dataclass
-class Character(Pattern, ConcatenatableMixin, CharacterSetItem):
+class Character(Pattern, ConcatenatableMixin, RepetitionMixin, CharacterSetItem):
     
     value : str
 

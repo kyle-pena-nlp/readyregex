@@ -11,3 +11,7 @@ class ConcatenatableBase(ABC):
     @abstractmethod
     def add(self, other : 'ConcatenatableBase') -> 'ConcatenatableBase':
         pass
+
+    @abstractmethod
+    def __add__(self, other : 'ConcatenatableBase') -> 'ConcatenatableBase':
+        pass

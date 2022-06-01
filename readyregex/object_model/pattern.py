@@ -11,6 +11,10 @@ class Pattern(ABC, TypeHintValidationMixin):
 
     def __post_init__(self):
         self._validate_types()
+        self._validate_input()        
+    
+    def _validate_input(self):
+        pass
 
     @abstractmethod
     def regex(self):
