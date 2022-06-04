@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Sequence
+
+from readyregex.object_model.repetition_mixin import RepetitionMixin
 from .pattern import Pattern
 from .concatenatable_mixin import ConcatenatableMixin
 from .string_literal import StringLiteral

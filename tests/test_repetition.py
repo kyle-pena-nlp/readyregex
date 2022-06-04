@@ -17,7 +17,7 @@ def test_kleene_star_init_using_Character(kleene_star_init_using_Character):
 
 @pytest.fixture
 def kleene_star_init_using_str():
-    return Repetition("a", None, None) 
+    return Repetition(Character("a"), None, None) 
 
 def test_kleene_star_init_using_character(kleene_star_init_using_str):
     assert kleene_star_init_using_str.match_whole_string("")
@@ -26,7 +26,7 @@ def test_kleene_star_init_using_character(kleene_star_init_using_str):
 
 @pytest.fixture
 def kleene_star_init_using_None_None():
-    return Repetition("a", None, None)
+    return Repetition(Character("a"), None, None)
 
 def test_kleene_star_init_using_None_None(kleene_star_init_using_None_None):
     assert kleene_star_init_using_None_None.match_whole_string("")
@@ -35,7 +35,7 @@ def test_kleene_star_init_using_None_None(kleene_star_init_using_None_None):
 
 @pytest.fixture
 def kleene_star_init_using_0_None():
-    return Repetition("a", 0, None)
+    return Repetition(Character("a"), 0, None)
 
 def test_kleene_star_init_using_0_None(kleene_star_init_using_0_None):
     assert kleene_star_init_using_0_None.match_whole_string("")
@@ -44,7 +44,7 @@ def test_kleene_star_init_using_0_None(kleene_star_init_using_0_None):
 
 @pytest.fixture
 def rep_0_0():
-    return Repetition("a", 0, 0)
+    return Repetition(Character("a"), 0, 0)
 
 def test_rep_0_0(rep_0_0):
     assert rep_0_0.match_whole_string("")
@@ -53,7 +53,7 @@ def test_rep_0_0(rep_0_0):
 
 @pytest.fixture
 def rep_1_1():
-    return Repetition("a", 1, 1)
+    return Repetition(Character("a"), 1, 1)
 
 def test_rep_1_1(rep_1_1):
     assert rep_1_1.match_whole_string("a")
@@ -62,7 +62,7 @@ def test_rep_1_1(rep_1_1):
 
 @pytest.fixture
 def rep_1_2():
-    return Repetition("a", 1, 2)
+    return Repetition(Character("a"), 1, 2)
 
 def test_rep_1_2(rep_1_2):
     assert rep_1_2.match_whole_string("a")
@@ -72,7 +72,7 @@ def test_rep_1_2(rep_1_2):
 
 @pytest.fixture
 def rep_0_1():
-    return Repetition("a", 0, 1)
+    return Repetition(Character("a"), 0, 1)
 
 def test_rep_0_1(rep_0_1):
     assert rep_0_1.match_whole_string("")
@@ -81,7 +81,7 @@ def test_rep_0_1(rep_0_1):
 
 @pytest.fixture
 def rep_max_1():
-    return Repetition("a", None, 1)
+    return Repetition(Character("a"), None, 1)
 
 def test_rep_max_1(rep_max_1):
     assert rep_max_1.match_whole_string("")
@@ -90,7 +90,7 @@ def test_rep_max_1(rep_max_1):
 
 @pytest.fixture
 def rep_max_2():
-    return Repetition("a", None, 2)
+    return Repetition(Character("a"), None, 2)
 
 def test_rep_max_2(rep_max_2):
     assert rep_max_2.match_whole_string("")
@@ -109,7 +109,7 @@ def test_rep_min_1(rep_min_1):
 
 @pytest.fixture
 def rep_min_2():
-    return Repetition("a", 2, None)
+    return Repetition(Character("a"), 2, None)
 
 def test_rep_min_2(rep_min_2):
     assert rep_min_2.match_whole_string("aa")
@@ -120,23 +120,23 @@ def test_rep_min_2(rep_min_2):
 def test_reverse_order_bounds_raises_error():
     
     with pytest.raises(ReadyRegexException):
-        Repetition("a", 1, 0)
+        Repetition(Character("a"), 1, 0)
     
     with pytest.raises(ReadyRegexException):
-        Repetition("a", 2, 1)
+        Repetition(Character("a"), 2, 1)
 
 
 def test_negative_bounds_raises_error():
 
     with pytest.raises(ReadyRegexException):
-        Repetition("a", -1, None)
+        Repetition(Character("a"), -1, None)
 
     with pytest.raises(ReadyRegexException):
-        Repetition("a", None, -1) 
+        Repetition(Character("a"), None, -1) 
 
     with pytest.raises(ReadyRegexException):
-        Repetition("a", -2, -1)        
+        Repetition(Character("a"), -2, -1)        
 
 def test_double_kleene_star_does_not_cause_exception():
     Repetition(RegexLiteral("a*"), 0, None)
-    Repetition(Repetition("a", 0, None), 0, None)
+    Repetition(Repetition(Character("a"), 0, None), 0, None)

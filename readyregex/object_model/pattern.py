@@ -4,7 +4,9 @@ from typing import Dict, Any, Set
 import re, logging, sys, json
 from .type_hint_validation_mixin import TypeHintValidationMixin
 from ..ready_regex_exception import ReadyRegexException
-from ..options import Options
+from .options import Options
+
+# Thought:  Separate regex method into a build() -> Pattern and regex() -> str method?
 
 @dataclass
 class Pattern(ABC, TypeHintValidationMixin):
@@ -12,7 +14,7 @@ class Pattern(ABC, TypeHintValidationMixin):
     def __post_init__(self):
         self._validate_types()
         self._validate_input()        
-    
+
     def _validate_input(self):
         pass
 
@@ -29,7 +31,7 @@ class Pattern(ABC, TypeHintValidationMixin):
         regex_string = self.regex()
         regex_string = "^{}$".format(regex_string)
         self.debug("regex_string: {}, string: {}", regex_string, string)       
-        return re.match(regex_string, string)
+        return re.match(regex_string, string)      
     
     def debug(self, msg, *args):
         # logging.debug does not do new-style formatting, so we have to do it ourselves

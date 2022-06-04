@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+
+from readyregex.object_model.repetition_mixin import RepetitionMixin
 from .character_set_item import CharacterSetItem
 from .pattern import Pattern
 from .character import Character

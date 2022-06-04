@@ -1,15 +1,20 @@
 from abc import ABC
 from typing import Union, Tuple, Optional
 from readyregex.object_model.repetition import Repetition
+from readyregex.object_model.options import RepetitionOptions, Options
 
 class RepetitionMixin(ABC):
     
-    def __mul__(self, spec : Union[int,Tuple[Optional[int],Optional[int]]]):
+    def __mul__(self, spec : Union[Options, RepetitionOptions, int, Tuple[Optional[int],Optional[int]]]):
         
         LB = None
         UB = None
 
-        if isinstance(spec, int):
+        if isinstance(spec, Options):
+            spec = spec.to_rep_spec()
+        elif isinstance(spec, RepetitionOptions):
+            spec = spec.to_rep_spec()
+        elif isinstance(spec, int):
             spec = (spec, spec)
         elif isinstance(spec, tuple):
             pass

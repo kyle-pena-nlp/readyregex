@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from readyregex.object_model.concatenatable_mixin import ConcatenatableMixin
 from readyregex.object_model.pattern import Pattern
-from readyregex.options import Options
+from readyregex.object_model.options import Options
 
 
 @dataclass

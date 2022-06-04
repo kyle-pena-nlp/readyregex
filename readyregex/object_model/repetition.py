@@ -5,7 +5,6 @@ from enum import Enum
 from .concatenatable_base import ConcatenatableBase
 from .surroundable_mixin import SurroundableMixin
 from .pattern import Pattern
-from .string_literal import StringLiteral
 from .concatenatable_mixin import ConcatenatableMixin
 from ..ready_regex_exception import ReadyRegexException
 
@@ -17,8 +16,6 @@ class Repetition(Pattern, ConcatenatableMixin, SurroundableMixin):
     ub : Union[None,int]
     
     def __post_init__(self):
-
-        self.content = StringLiteral(self.content) if isinstance(self.content, str) else self.content
 
         if not (self.lb is None or self.lb >= 0):
             raise ReadyRegexException("lb must be None or non-negative, was {}".format(self.lb))
@@ -32,13 +29,19 @@ class Repetition(Pattern, ConcatenatableMixin, SurroundableMixin):
         self._validate_types()
     
     def regex(self):
+        # Omit (zero reptitions). Note: Here, 0 *does not* mean the same thing as None (which means "unspecified")
+        if self.lb == self.ub == 0:
+            return ""        
         # Optional
-        if not self.lb and self.ub == 1:
+        elif not self.lb and self.ub == 1:
             return "({})?".format(self.content.regex())
         # Exactly one repetition
         elif self.lb == 1 and self.ub == 1:
             return self.content.regex()
-        # Range of repetitions (m,n)
+        # m == n, m != None
+        elif self.lb is not None and self.lb == self.ub:
+            return "({}){{{}}}".format(self.content.regex(), self.lb)        
+        # Range of repetitions (m,n)            
         elif self.lb is not None and self.ub is not None:
             return "({}){{{},{}}}".format(self.content.regex(), self.lb, self.ub)
         # At least one (min 1, no max)
