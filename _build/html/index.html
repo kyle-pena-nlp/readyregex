@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Welcome to readyregex’s documentation! &#8212; readyregex  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="welcome-to-readyregex-s-documentation">
+<h1>Welcome to readyregex’s documentation!<a class="headerlink" href="#welcome-to-readyregex-s-documentation" title="Permalink to this heading">¶</a></h1>
+<p><strong>readyregex</strong> is a Python library which offers a large number of off-the-shelf, customizable text matching patterns for everyday use.</p>
+<p>These patterns include:</p>
+<ul class="simple">
+<li><p>addresses</p></li>
+<li><p>credit cards</p></li>
+<li><p>dates</p></li>
+<li><p>doges</p></li>
+<li><p>emails</p></li>
+<li><p>emojis</p></li>
+<li><p>filepaths</p></li>
+<li><p>html tags</p></li>
+<li><p>ip addresses</p></li>
+<li><p>passport numbers</p></li>
+<li><p>phone numbers</p></li>
+<li><p>passwords by strength levels</p></li>
+<li><p>slugs</p></li>
+<li><p>social security numbers</p></li>
+<li><p>timestamps in a variety of formats</p></li>
+<li><p>zipcodes</p></li>
+</ul>
+<p>…and more!</p>
+<p>It’s easy to get started:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">readyregex</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># Customize an off-the-shelf pattern according to your needs</span>
+<span class="n">pn</span> <span class="o">=</span> <span class="n">PhoneNumber</span><span class="p">(</span><span class="n">extra_spaces</span> <span class="o">=</span> <span class="n">RepetitionOptions</span><span class="o">.</span><span class="n">AtMostOne</span><span class="p">)</span>
+
+<span class="c1"># Match to text</span>
+<span class="n">pn</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;904-867-5309&quot;</span><span class="p">)</span> <span class="c1"># True</span>
+
+<span class="c1"># Or get the regex pattern itself, if desired</span>
+<span class="n">pn_regex</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">regex</span><span class="p">()</span>
+
+<span class="c1"># Use a pattern to build something more complicated</span>
+<span class="n">three_phone_numbers</span> <span class="o">=</span> <span class="p">(</span><span class="n">pn</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span><span class="p">)</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="n">three_phone_numbers</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;904-867-5309 904-867-5309 904-867-5309&quot;</span><span class="p">)</span> <span class="c1"># True</span>
+
+<span class="c1"># Maybe we don&#39;t have what you need? That&#39;s ok, you can build your own!</span>
+<span class="n">digit</span> <span class="o">=</span> <span class="n">Range</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">)</span> <span class="o">|</span> <span class="n">Range</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="s2">&quot;9&quot;</span><span class="p">)</span>
+<span class="n">_1800number</span> <span class="o">=</span> <span class="s2">&quot;1-800&quot;</span> <span class="o">+</span> <span class="n">digit</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">digit</span><span class="o">*</span><span class="mi">4</span>
+<span class="n">_1800number</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s2">&quot;1-800 BUY JUNK&quot;</span><span class="p">)</span> <span class="c1"># True</span>
+</pre></div>
+</div>
+<p>And if we don’t have what you need, <strong>readyregex</strong> also offers an object-oriented approach to building regex patterns.  We will also gladly consider pull requests.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="#">readyregex</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Kyle Pena.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

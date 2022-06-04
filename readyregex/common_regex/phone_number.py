@@ -7,7 +7,7 @@ from readyregex.object_model.optional import Optional
 from readyregex.object_model.separator_pattern import SeparatorPattern
 from readyregex.object_model.choice import Choice
 from readyregex.object_model.pattern import Pattern
-from readyregex.object_model.options import Options, RepetitionOptions
+from readyregex.object_model.options import Options, Repetitions
 from readyregex.object_model.string_literal import StringLiteral
 
 
@@ -23,7 +23,7 @@ class PhoneNumber(Pattern):
     areacode : Options                 = Options.Mandatory
     areacode_parentheses : Options     = Options.Optional
     dashes : Options                   = Options.Optional
-    extra_spaces : RepetitionOptions = RepetitionOptions.AtMostOne
+    extra_spaces : Repetitions = Repetitions.AtMostOne
 
     def _validate_input(self):
         if self.international.mandatory() and not self.areacode.mandatory():

@@ -2,7 +2,6 @@ from dataclasses import dataclass, field
 from typing import Sequence
 
 from .pattern import Pattern
-from .string_literal import StringLiteral
 
 @dataclass
 class Choice(Pattern):
@@ -15,9 +14,3 @@ class Choice(Pattern):
 
     def regex(self):
         return "({})".format("|".join("({})".format(choice.regex()) for choice in self.choices))
-
-    def or_(self, other: Pattern):
-        return Choice(self.choices + other)
-
-    def __or__(self, other : Pattern):
-        return self.or_(other)

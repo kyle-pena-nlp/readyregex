@@ -1,0 +1,41 @@
+Welcome to readyregex's documentation!
+======================================
+
+**readyregex** is a Python library which offers a large number of off-the-shelf, customizable text matching patterns for everyday use.
+
+These patterns include:
+- addresses
+- credit cards
+- dates
+- doges
+- emails
+- emojis
+- filepaths
+- html tags
+- ip addresses
+- passport numbers
+- phone numbers
+- passwords by strength levels
+- slugs
+- social security numbers
+- timestamps in a variety of formats
+- zipcodes
+...and more!
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   readme
+   installation
+   usage
+   modules
+   contributing
+   authors
+   history
+
+Indices and tables
+==================
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

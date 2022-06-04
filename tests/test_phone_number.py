@@ -5,7 +5,7 @@
 import pytest
 
 from readyregex import *
-from readyregex.object_model.options import RepetitionOptions
+from readyregex.object_model.options import Repetitions
 
 @pytest.fixture
 def default_pn():

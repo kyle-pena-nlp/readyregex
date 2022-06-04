@@ -24,7 +24,7 @@ def test_A_str(A_str):
 
 @pytest.fixture
 def A_Z():
-    return CharacterSet(positives = [ CharacterRange("A", "Z") ])
+    return CharacterSet(positives = [ Range("A", "Z") ])
 
 def test_A_Z(A_Z):
     assert A_Z.match("A")
@@ -33,7 +33,7 @@ def test_A_Z(A_Z):
 
 @pytest.fixture
 def A_Z_and_0_9():
-    return CharacterSet(positives = [ CharacterRange("A", "Z"), CharacterRange("0", "9") ])
+    return CharacterSet(positives = [ Range("A", "Z"), Range("0", "9") ])
 
 def test_A_Z_and_0_9(A_Z_and_0_9):
     assert A_Z_and_0_9.match("A")
@@ -45,7 +45,7 @@ def test_A_Z_and_0_9(A_Z_and_0_9):
 
 @pytest.fixture
 def not_0_9():
-    return CharacterSet(positives = [ ], negatives = [ CharacterRange("0", "9") ])
+    return CharacterSet(positives = [ ], negatives = [ Range("0", "9") ])
 
 def test_not_0_9(not_0_9):
     assert not_0_9.match("A")

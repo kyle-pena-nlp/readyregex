@@ -1,4 +1,4 @@
-from .character_range import CharacterRange
+from .character_range import Range
 from .character_set import CharacterSet
 from .character import Character
 from .choice import Choice

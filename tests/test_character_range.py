@@ -8,15 +8,15 @@ from readyregex import *
 
 @pytest.fixture
 def A_Z_range_pattern():
-    return CharacterRange("A", "Z")
+    return Range("A", "Z")
 
 @pytest.fixture
 def basic_latin_character_range_pattern():
-    return CharacterRange(chr(0X0000), chr(0x007F))
+    return Range(chr(0X0000), chr(0x007F))
 
 @pytest.fixture
 def latin_1_supplement_character_range_pattern():
-    return CharacterRange(chr(0X0000), chr(0x00FF))
+    return Range(chr(0X0000), chr(0x00FF))
 
 def test_A_Z_range_pattern(A_Z_range_pattern):
     assert A_Z_range_pattern.match("A")
@@ -38,10 +38,10 @@ def test_latin_1_supplement_character_range_pattern(latin_1_supplement_character
 
 def test_non_character_input_raises_exception():
     with pytest.raises(ReadyRegexException):
-        CharacterRange("ab", "c")
+        Range("ab", "c")
     with pytest.raises(ReadyRegexException):
-        CharacterRange("a", "bc")     
+        Range("a", "bc")     
 
 def test_character_range_must_be_in_order():
     with pytest.raises(ReadyRegexException):
-        CharacterRange("z", "a")  
+        Range("z", "a")  

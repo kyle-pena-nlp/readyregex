@@ -6,7 +6,7 @@ from readyregex.object_model.choice import Choice
 from readyregex.object_model.options import Options
 from readyregex.object_model.pattern import Pattern
 from readyregex.object_model.character_set import CharacterSet
-from readyregex.object_model.options import RepetitionOptions
+from readyregex.object_model.options import Repetitions
 from readyregex.object_model.regex_literal import RegexLiteral
 
 @dataclass
@@ -17,7 +17,7 @@ class SeparatorPattern(Pattern):
     # Is the separator (like a dash or a slash) mandatory/optional/prohibited
     separator_options : Options
     # How much whitespace should we surround the separator with (can be "No whitespace")
-    extra_spaces : RepetitionOptions
+    extra_spaces : Repetitions
     # Should we guarantee that the separator is non-zero-width
     allow_no_separation : bool = False
 

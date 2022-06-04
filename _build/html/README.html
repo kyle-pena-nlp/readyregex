@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>readyregex &#8212; readyregex  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="readyregex">
+<h1>readyregex<a class="headerlink" href="#readyregex" title="Permalink to this heading">¶</a></h1>
+<a class="reference external image-reference" href="https://pypi.python.org/pypi/readyregex"><img alt="https://img.shields.io/pypi/v/readyregex.svg" src="https://img.shields.io/pypi/v/readyregex.svg" /></a>
+<a class="reference external image-reference" href="https://travis-ci.com/kyle-pena-nlp/readyregex"><img alt="https://img.shields.io/travis/kyle-pena-nlp/readyregex.svg" src="https://img.shields.io/travis/kyle-pena-nlp/readyregex.svg" /></a>
+<a class="reference external image-reference" href="https://readyregex.readthedocs.io/en/latest/?badge=latest"><img alt="Documentation Status" src="https://readthedocs.org/projects/readyregex/badge/?version=latest" /></a>
+<a class="reference external image-reference" href="https://pyup.io/repos/github/kyle-pena-nlp/readyregex/"><img alt="Updates" src="https://pyup.io/repos/github/kyle-pena-nlp/readyregex/shield.svg" /></a>
+<p>readyregex contains a wide range of customizable and ready-made regex patterns for everyday use</p>
+<ul class="simple">
+<li><p>Free software: Apache Software License 2.0</p></li>
+<li><p>Documentation: <a class="reference external" href="https://readyregex.readthedocs.io">https://readyregex.readthedocs.io</a>.</p></li>
+</ul>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>TODO</p></li>
+</ul>
+<blockquote>
+<div><blockquote>
+<div><dl>
+<dt>Validation of Email addresses:</dt><dd><p>Email_Simple
+“”” validates if string contains a “&#64;” preceded or followed by characters:”””
+^S+&#64;S+$</p>
+<p>Email_Simple(character_restrictions=True)
+“””restricted to characters allowed in domain names”””
+^[A-Z0-9+_.-]+&#64;[A-Z0-9.-]+$</p>
+<p>Email_Simple(dot_checker=True)
+“””no consecutive dots, first and last characters cant be dots”””
+^[<a href="#id5"><span class="problematic" id="id6">A-Z0-9_</span></a>!#$%&amp;’<a href="#id1"><span class="problematic" id="id2">*</span></a>+/=?`{|}~^.-]+&#64;[A-Z0-9.-]+$</p>
+<p>Email_Simple(domain_name=True)
+“””top level domain level must be have between 2 to 6 characters i.e .uk”””</p>
+<p>Email_Simple(common_domain_name=True)
+“only allows common domain names: com|net|org|edu|gov
+Can also use <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains">https://en.wikipedia.org/wiki/List_of_Internet_top-level_domains</a>”</p>
+</dd>
+<dt>Validation of Traditional Date formats:</dt><dd><p>Date()
+“””mm/dd/yy, mm/dd/yyyy, dd/mm/yy, and dd/mm/yyyy. Omit leading zeros”””
+^(?:
+# m/d or mm/dd | )
+(1[0-2]|0?[1-9])/(3[01]|[12][0-9]|0?[1-9])</p>
+<p># d/m or dd/mm
+(3[01]|[12][0-9]|0?[1-9])/(1[0-2]|0?[1-9])</p>
+<p># /yy or /yyyy
+/(?:[0-9]{2})?[0-9]{2}$</p>
+<p>SearchDate()
+“””Match date in text”””
+b(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}b</p>
+<p>Date(valid_dates=True)
+“””Ignore things like Feb 30”””
+^(?:
+# 28 day months
+# 30 day months
+# 31 day months
+#More on this - there might be a more elegant solution</p>
+<p>Date(month_text=True)
+“”” Transform ‘7 July 1958’ into 07/07/1958”””</p>
+<p>#Other date variations</p>
+</dd>
+<dt>Validation of Postal Codes:</dt><dd><p>ZIP()
+“”” US postal code (ZIP (five digits), “-” ,4(optional))”””
+^[0-9]{5}(?:-[0-9]{4})?$</p>
+<p>ZIP(UK=True, basic=True)
+^[A-Z]{1,2}[0-9R][0-9A-Z]?●[0-9][ABD-HJLNP-UW-Z]{2}$</p>
+<p>ZIP(UK=True, basic=False)
+^(?:(?:[A-PR-UWYZ][0-9]{1,2}|[A-PR-UWYZ][A-HK-Y][0-9]{1,2}
+<a href="#id3"><span class="problematic" id="id4">|</span></a>[A-PR-UWYZ][0-9][A-HJKSTUW]|[A-PR-UWYZ][A-HK-Y][0-9]
+[ABEHMNPRV-Y])●[0-9][ABD-HJLNP-UW-Z]{2}|GIR 0AA)$</p>
+<p>ZIP(Canadian=True)
+^(?!.*[DFIOQU])[A-VXY][0-9][A-Z]●?[0-9][A-Z][0-9]$</p>
+<p>#Other countries</p>
+<p>#Create your own
+ZIP(Custom=True)
+#Set rules</p>
+</dd>
+<dt>Validation of  Passwords:</dt><dd><p>Password(lenght_1= ,length_2= ,ASCIII_only= True,uppercase= ,special_characters= ,consecutive_characters=, )
+^(?=.{8,32}$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).*
+#other rules</p>
+</dd>
+<dt>Validation of Credit Card Numbers:</dt><dd><p>CreditCard()
+“””Visa 13 or 16 digits, starting with 4. MasterCard 16 digits, starting with 51 through 55.
+Discover 16 digits, starting with 6011 or 65.
+American Express 15 digits, starting with 34 or 37.
+Diners Club 14 digits, starting with 300 through 305, 36, or 38.
+JCB 15 digits, starting with 2131 or 1800, or 16 digits starting with 35.”””</p>
+<p>^(?:
+(?&lt;visa&gt;4[0-9]{12}(?:[0-9]{3})?) |
+(?&lt;mastercard&gt;5[1-5][0-9]{14}) |
+(?&lt;discover&gt;6(?:011|5[0-9]{2})[0-9]{12}) |
+(?&lt;amex&gt;3[47][0-9]{13}) |
+(?&lt;diners&gt;3(?:0[0-5]|[68][0-9])[0-9]{11}) |
+(?&lt;jcb&gt;(?:2131|1800|35[0-9]{3})[0-9]{11}) )$</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>Validation of Social Security Numbers:</p>
+<blockquote>
+<div><blockquote>
+<div><p>“””The area number cannot be 000, 666, or between 900 and 999
+Digits four and five are called the group number and range from 01 to 99.
+The last four digits are serial numbers from 0001 to 9999.”””
+SSN()</p>
+<p>regex= ^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$</p>
+<p>#Find SSN in text
+use b(regex)b</p>
+</div></blockquote>
+<dl>
+<dt>Validation of time formats</dt><dd><p>“””hh:mm and hh:mm:ss
+12-hour and 24-hour”””</p>
+<p>TimeFormat(seconds= False,Format12h= True)
+^(1[0-2]|0?[1-9]):([0-5]?[0-9])(●?[AP]M)?$</p>
+<p>TimeFormat(seconds= False,Format12h= False)
+^(2[0-3]|[01]?[0-9]):([0-5]?[0-9])$</p>
+<p>TimeFormat(seconds= True,Format12h= True)
+^(1[0-2]|0?[1-9]):([0-5]?[0-9]):([0-5]?[0-9])(●?[AP]M)?$</p>
+<p>TimeFormat(seconds= True,Format12h= False)
+^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$</p>
+<p>ISODate()
+“””ISO 8601 Date and timeformat”
+#more on this</p>
+</dd>
+</dl>
+</div></blockquote>
+</div></blockquote>
+<dl>
+<dt>…</dt><dd><p>Validation of text length
+Validation of Numbers of lines in text
+URLs
+IP Addresses
+HTML Tags
+Adresses
+File Paths
+PassportNumbers
+Username(similar to password)</p>
+<dl class="simple">
+<dt>SuperBasicPackage:</dt><dd><p>Alphanumeric(with space, without, no numbers)
+Digits(type= Whole, Decimal, Negative, Fraction… Combinations)</p>
+</dd>
+</dl>
+<p>#more on this</p>
+</dd>
+</dl>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Permalink to this heading">¶</a></h2>
+<p>This package was created with <a class="reference external" href="https://github.com/audreyr/cookiecutter">Cookiecutter</a> and the <a class="reference external" href="https://github.com/audreyr/cookiecutter-pypackage">audreyr/cookiecutter-pypackage</a> project template.</p>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="index.html">readyregex</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Kyle Pena.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/README.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

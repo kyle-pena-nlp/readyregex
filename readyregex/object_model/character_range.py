@@ -5,7 +5,7 @@ from .character import Character
 from ..ready_regex_exception import ReadyRegexException
 
 @dataclass
-class CharacterRange(Pattern, CharacterSetItem):
+class Range(Pattern, CharacterSetItem):
 
     start : str
     end : str

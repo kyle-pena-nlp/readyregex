@@ -4,7 +4,7 @@ from typing import Iterable, Union, Tuple, Optional
 import re, logging
 from .type_hint_validation_mixin import TypeHintValidationMixin
 from ..ready_regex_exception import ReadyRegexException
-from .options import Options, RepetitionOptions
+from .options import Options, Repetitions
 
 # Thought:  Separate regex method into a build() -> Pattern and regex() -> str method?
 
@@ -18,12 +18,14 @@ class Pattern(ABC, TypeHintValidationMixin):
     def _validate_input(self):
         pass
     
-    # TODO: options on 'build'?
     def build(self):
+        return self
+
+    def simplify(self):
         return self
     
     def regex(self):
-        return self.build().regex()
+        return self.build().simplify().regex()
     
     def match(self, string):
         regex_string = self.regex()
@@ -42,6 +44,21 @@ class Pattern(ABC, TypeHintValidationMixin):
         msg = "(In {}) ".format(type(self)) + msg
         logging.debug(msg)
 
+
+
+    def join(self, others : Iterable[Union['Pattern',str]]) -> 'Pattern':
+        parts = []
+        for i, part in enumerate(others):
+            if isinstance(part, PatternSequence):
+                parts.extend(part.items)
+            elif isinstance(part, str):
+                parts.append(StringLiteral(part))
+            else:
+                parts.append(part)
+            if i < len(others) - 1:
+                parts.append(self)
+        return PatternSequence(parts)   
+
     def add(self, other : 'Pattern') -> 'Pattern':
         if isinstance(self, PatternSequence):
             items = list(self.items)
@@ -49,32 +66,23 @@ class Pattern(ABC, TypeHintValidationMixin):
             items = [self]
         if isinstance(other, PatternSequence):
             items.extend(other.items)
+        elif isinstance(other, str):
+            items.append(StringLiteral(other))
         else:
             items.append(other)
         return PatternSequence(items)
 
     def __add__(self, other : 'Pattern') -> 'Pattern':
-        return self.add(other)
+        return self.add(other)      
 
-    def join(self, others : Iterable['Pattern']) -> 'Pattern':
-        parts = []
-        for i, part in enumerate(others):
-            if isinstance(part, PatternSequence):
-                parts.extend(part.items)
-            else:
-                parts.append(part)
-            if i < len(others) - 1:
-                parts.append(self)
-        return PatternSequence(parts)         
-
-    def __mul__(self, spec : Union[Options, RepetitionOptions, int, Tuple[Optional[int],Optional[int]]]):
+    def __mul__(self, spec : Union[Options, Repetitions, int, Tuple[Optional[int],Optional[int]]]):
         
         LB = None
         UB = None
 
         if isinstance(spec, Options):
             spec = spec.to_rep_spec()
-        elif isinstance(spec, RepetitionOptions):
+        elif isinstance(spec, Repetitions):
             spec = spec.to_rep_spec()
         elif isinstance(spec, int):
             spec = (spec, spec)
@@ -84,6 +92,17 @@ class Pattern(ABC, TypeHintValidationMixin):
             raise Exception("Right hand side of multiplication must be an integer, or a repetition bound such as (2,5), (None,6), (7,None), or (None,None)")
 
         return Repetition(self, spec[0], spec[1])
+
+    def __or__(self, other : Union['Pattern', str]):
+        return self.or_(other)
+
+    def or_(self, other : Union['Pattern', str]):
+        choices = [self]
+        if isinstance(other, Choice):
+            choices.extend(other.choices)
+        elif isinstance(other, str):
+            choices.append(StringLiteral(other))
+        return Choice(choices)
 
 @dataclass
 class PatternSequence(Pattern):
@@ -143,3 +162,28 @@ class Repetition(Pattern):
             return "({})*".format(self.content.regex())
         else:
             raise Exception()
+
+@dataclass
+class StringLiteral(Pattern):
+
+    string : str
+    
+    def __post_init__(self):
+        self.regex_escaped_string = re.escape(self.string)
+        self._validate_types()
+
+    def regex(self):
+        return self.regex_escaped_string
+
+
+@dataclass
+class Choice(Pattern):
+
+    choices : Iterable[Pattern] = field(default_factory = list)
+
+    def __post_init__(self):
+        self.choices = [ StringLiteral(item) if isinstance(item,str) else item for item in self.choices ]
+        self._validate_types()
+
+    def regex(self):
+        return "({})".format("|".join("({})".format(choice.regex()) for choice in self.choices))

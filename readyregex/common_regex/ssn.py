@@ -1,14 +1,14 @@
 from dataclasses import dataclass, field
 from readyregex.object_model.character import Character
 from readyregex.object_model.pattern import Pattern
-from readyregex.object_model.options import Options, RepetitionOptions
+from readyregex.object_model.options import Options, Repetitions
 from readyregex.object_model.regex_literal import RegexLiteral
 from readyregex.object_model.separator_pattern import SeparatorPattern
 
 @dataclass
 class SSN(Pattern):
 
-    extra_spaces : RepetitionOptions = RepetitionOptions.None_
+    extra_spaces : Repetitions = Repetitions.None_
 
     def build(self):
 

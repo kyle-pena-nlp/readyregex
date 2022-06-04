@@ -43,7 +43,7 @@ class Options(enum.Enum):
         else:
             raise Exception(str(self))
 
-class RepetitionOptions(enum.Enum):
+class Repetitions(enum.Enum):
     None_       = 0
     Any         = 1
     ExactlyOnce = 2
@@ -51,30 +51,30 @@ class RepetitionOptions(enum.Enum):
     AtMostOne   = 4
 
     def to_rep_spec(self):
-        if self == RepetitionOptions.None_:
+        if self == Repetitions.None_:
             return (0,0)
-        elif self == RepetitionOptions.Any:
+        elif self == Repetitions.Any:
             return (None,None)
-        elif self == RepetitionOptions.ExactlyOnce:
+        elif self == Repetitions.ExactlyOnce:
             return (1,1)
-        elif self == RepetitionOptions.AtLeastOne:
+        elif self == Repetitions.AtLeastOne:
             return (1,None)
-        elif self == RepetitionOptions.AtMostOne:
+        elif self == Repetitions.AtMostOne:
             return (None,1)
         else:
             raise Exception(str(self))
 
     def none(self):
-        return RepetitionOptions.None_ == self
+        return Repetitions.None_ == self
 
     def any(self):
-        return RepetitionOptions.Any in self
+        return Repetitions.Any in self
 
     def exactlyonce(self):
-        return RepetitionOptions.ExactlyOnce in self
+        return Repetitions.ExactlyOnce in self
 
     def atleastone(self):
-        return RepetitionOptions.AtLeastOne in self
+        return Repetitions.AtLeastOne in self
 
     def atmostone(self):
-        return RepetitionOptions.AtMostOne in self
+        return Repetitions.AtMostOne in self
