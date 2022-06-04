@@ -8,7 +8,5 @@ from readyregex.object_model.options import Options
 @dataclass
 class Emoji(Pattern, ConcatenatableMixin):
 
-    options: Options = Options.Default
-
     def regex(self):
         raise Exception("Unimplemented.")

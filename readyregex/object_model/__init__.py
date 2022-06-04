@@ -9,9 +9,7 @@ from .regex_literal import RegexLiteral
 from .special_character_classes import SpecialCharacterClasses
 from .string_literal import StringLiteral
 from .empty_pattern import EmptyPattern
-from .repetition import Repetition
 
 # do not expose in top-level module's __init__.py
 from .pattern import Pattern
-from .concatenatable_mixin import ConcatenatableMixin
 from .type_hint_validation_mixin import TypeHintValidationMixin

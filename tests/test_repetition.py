@@ -5,6 +5,7 @@
 import pytest
 
 from readyregex import *
+from readyregex.object_model.pattern import Repetition
 
 @pytest.fixture
 def kleene_star_init_using_Character():
@@ -100,7 +101,7 @@ def test_rep_max_2(rep_max_2):
 
 @pytest.fixture 
 def rep_min_1():
-    return Repetition("a", 1, None)
+    return Repetition(Character("a"), 1, None)
 
 def test_rep_min_1(rep_min_1):
     assert rep_min_1.match_whole_string("a")

@@ -1,14 +1,11 @@
 import re
 from dataclasses import dataclass
-
-from readyregex.object_model.repetition_mixin import RepetitionMixin
-from .concatenatable_mixin import ConcatenatableMixin
 from .character_set_item import CharacterSetItem
 from .pattern import Pattern
 from ..ready_regex_exception import ReadyRegexException
 
-@dataclass
-class Character(Pattern, ConcatenatableMixin, RepetitionMixin, CharacterSetItem):
+@dataclass()
+class Character(Pattern, CharacterSetItem):
     
     value : str
 

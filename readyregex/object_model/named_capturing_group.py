@@ -1,19 +1,11 @@
-from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
-from typing import Set, Tuple, Sequence, Union, Any
-from enum import Enum
-
-from readyregex.object_model.repetition_mixin import RepetitionMixin
-from .concatenatable_base import ConcatenatableBase
-from .concatenatable_mixin import ConcatenatableMixin
-from .surroundable_mixin import SurroundableMixin
+from dataclasses import dataclass
 from .pattern import Pattern
 from ..ready_regex_exception import ReadyRegexException
 
 @dataclass
-class NamedCapturingGroup(Pattern, ConcatenatableMixin, RepetitionMixin, SurroundableMixin):
+class NamedCapturingGroup(Pattern):
     name : str
-    content : ConcatenatableBase
+    content : Pattern
 
     def __post_init__(self):
         if len(self.name) == 0:

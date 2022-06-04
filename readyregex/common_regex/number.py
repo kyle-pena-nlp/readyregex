@@ -9,7 +9,7 @@ class Number(Pattern, ConcatenatableMixin):
 
     options: Options = Options.Default
 
-    def regex(self):
+    def build(self):
 
         # Options: Whole, Decimal, Scientific, Negative, etc., combinations, per the readme suggestions.  Not sure about fraction?  Maybe this is a separate pattern.
 

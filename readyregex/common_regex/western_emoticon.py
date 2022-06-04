@@ -87,5 +87,5 @@ class WesternEmoticon(Pattern, ConcatenatableMixin):
         "<_<",   ">_>"
     ]
 
-    def regex(self):
-        return Choice([ StringLiteral(emoticon_string) for emoticon_string in WesternEmoticon.western_emoticons ]).regex()
+    def build(self):
+        return Choice([ StringLiteral(emoticon_string) for emoticon_string in WesternEmoticon.western_emoticons ])

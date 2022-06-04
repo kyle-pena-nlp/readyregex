@@ -8,8 +8,6 @@ from readyregex.object_model.options import Options
 @dataclass
 class Doge(Pattern, ConcatenatableMixin):
 
-    options: Options = Options.Default
-
     def regex(self):
         # TODO: options for ear types
         return StringLiteral("U・ᴥ・U")

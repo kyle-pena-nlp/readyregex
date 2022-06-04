@@ -1,34 +1,45 @@
 from dataclasses import dataclass, field
 from typing import Sequence, Union, List
-
-from readyregex.object_model.repetition_mixin import RepetitionMixin
-from .concatenatable_mixin import ConcatenatableMixin
 from .character_set_item import CharacterSetItem
 from .character import Character
 from .pattern import Pattern
 
 @dataclass
-class CharacterSet(Pattern, ConcatenatableMixin, RepetitionMixin):
+class CharacterSet(Pattern):
     
-    positives: List[Union[CharacterSetItem, str]] = field(default_factory = list)
-    negatives: List[Union[CharacterSetItem, str]] = field(default_factory = list)
+    positives: Union[str,CharacterSetItem,List[Union[CharacterSetItem, str]]] = field(default_factory = list)
+    negatives: Union[str,CharacterSetItem,List[Union[CharacterSetItem, str]]] = field(default_factory = list)
 
     def __post_init__(self):
-        self.positives = [ Character(item) if isinstance(item,str) else item for item in self.positives ]
-        self.negatives = [ Character(item) if isinstance(item,str) else item for item in self.negatives ]
+        self.positives = self._normalize_input(self.positives)
+        self.negatives = self._normalize_input(self.negatives)
         self._validate_types()
 
+    def _normalize_input(self, x):
+        if isinstance(x, str):
+            return [ Character(character) for character in x ]
+        elif isinstance(x, CharacterSetItem):
+            return [ x ]
+        elif isinstance(x, list):
+            return [ Character(item) if isinstance(item,str) else item for item in x ]
+        
+
+
     def include(self, item : Union[CharacterSetItem, str]):
-        if item not in self.positives:
-            self.positives.append(item)
-        if item in self.negatives:
-            self.negatives.remove(item)
+        items = self._normalize_input(item)
+        for item in items:
+            if item not in self.positives:
+                self.positives.append(item)
+            if item in self.negatives:
+                self.negatives.remove(item)
 
     def exclude(self, item : Union[CharacterSetItem, str]):
-        if item in self.positives:
-            self.positives.remove(item)
-        if item not in self.negatives:
-            self.negatives.append(item)
+        items = self._normalize_input(item)
+        for item in items:
+            if item in self.positives:
+                self.positives.remove(item)
+            if item not in self.negatives:
+                self.negatives.append(item)
 
     def regex(self):
         

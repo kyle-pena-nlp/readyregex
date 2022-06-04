@@ -1,14 +1,12 @@
 import re
 from dataclasses import dataclass
 
-from readyregex.object_model.repetition_mixin import RepetitionMixin
 from .pattern import Pattern
-from .concatenatable_mixin import ConcatenatableMixin
 from .pattern import Pattern
 from ..ready_regex_exception import ReadyRegexException
 
 @dataclass
-class RegexLiteral(Pattern, ConcatenatableMixin, RepetitionMixin):
+class RegexLiteral(Pattern):
 
     regex_string : str
 

@@ -1,14 +1,11 @@
 from dataclasses import dataclass
-
-from readyregex.object_model.repetition_mixin import RepetitionMixin
 from .character_set_item import CharacterSetItem
 from .pattern import Pattern
 from .character import Character
-from .concatenatable_mixin import ConcatenatableMixin
 from ..ready_regex_exception import ReadyRegexException
 
 @dataclass
-class CharacterRange(Pattern, ConcatenatableMixin, RepetitionMixin, CharacterSetItem):
+class CharacterRange(Pattern, CharacterSetItem):
 
     start : str
     end : str
