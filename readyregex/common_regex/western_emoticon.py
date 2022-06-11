@@ -1,15 +1,10 @@
 from dataclasses import dataclass, field
-from readyregex.object_model.concatenatable_mixin import ConcatenatableMixin
-from readyregex.object_model.pattern import Pattern
-from readyregex.object_model.string_literal import StringLiteral
-from readyregex.object_model.choice import Choice
-from readyregex.object_model.options import Options
+from ..object_model.pattern import *
+from ..object_model.options import *
 
 
 @dataclass
-class WesternEmoticon(Pattern, ConcatenatableMixin):
-
-    options: Options = Options.Default
+class WesternEmoticon(Pattern):
 
     # source: https://en.wikipedia.org/wiki/List_of_emoticons
     # todo: include flags / metadata so that user can specify Options.Smiley | Options.Surprise, for example

@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
-from readyregex.object_model.character import Character
-from readyregex.object_model.pattern import Pattern
-from readyregex.object_model.options import Options, Repetitions
-from readyregex.object_model.regex_literal import RegexLiteral
-from readyregex.object_model.separator_pattern import SeparatorPattern
+from ..object_model.pattern import *
+from ..object_model.options import *
+from ..object_model.separator_pattern import SeparatorPattern
+from ..object_model.regex_literal import RegexLiteral
+from ..object_model.character import Character
+
 
 @dataclass
 class SSN(Pattern):

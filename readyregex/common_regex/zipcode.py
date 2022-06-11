@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
-from readyregex.object_model.pattern import Pattern
-from readyregex.object_model.options import Options
+from ..object_model.pattern import *
+from ..object_model.options import *
 
 
 @dataclass

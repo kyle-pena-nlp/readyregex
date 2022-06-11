@@ -10,7 +10,7 @@ from readyregex import *
 def simple_choice():
     return Choice([StringLiteral("a"), StringLiteral("b")])
 
-def test_simple_choice(simple_choice):
+def test_simple_choice(simple_choice : Pattern):
     assert simple_choice.match("a")
     assert simple_choice.match("b")
     assert not simple_choice.match("c")

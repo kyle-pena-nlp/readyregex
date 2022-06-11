@@ -35,7 +35,7 @@ def test_A_Z(A_Z):
 def A_Z_and_0_9():
     return CharacterSet(positives = [ Range("A", "Z"), Range("0", "9") ])
 
-def test_A_Z_and_0_9(A_Z_and_0_9):
+def test_A_Z_and_0_9(A_Z_and_0_9 : Pattern):
     assert A_Z_and_0_9.match("A")
     assert A_Z_and_0_9.match("C")
     assert A_Z_and_0_9.match("Z")
@@ -47,7 +47,7 @@ def test_A_Z_and_0_9(A_Z_and_0_9):
 def not_0_9():
     return CharacterSet(positives = [ ], negatives = [ Range("0", "9") ])
 
-def test_not_0_9(not_0_9):
+def test_not_0_9(not_0_9 : Pattern):
     assert not_0_9.match("A")
     assert not not_0_9.match("0")
 
@@ -55,7 +55,7 @@ def test_not_0_9(not_0_9):
 def special_character_class():
     return CharacterSet(positives = [ SpecialCharacterClasses.DIGITS ])
 
-def test_special_class(special_character_class):
+def test_special_class(special_character_class : Pattern):
     assert special_character_class.match("0")
     assert not special_character_class.match("A")
 

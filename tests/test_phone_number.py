@@ -5,7 +5,9 @@
 import pytest
 
 from readyregex import *
+from readyregex.common_regex.phone_number import PhoneNumber
 from readyregex.object_model.options import Repetitions
+from readyregex.object_model.pattern import Pattern
 
 @pytest.fixture
 def default_pn():

@@ -40,13 +40,14 @@ It's easy to get started:
   from readyregex import *
 
   # Customize an off-the-shelf pattern according to your needs
-  pn = PhoneNumber(extra_spaces = RepetitionOptions.AtMostOne)
+  pn = PhoneNumber(extra_spaces = Repetitions.AtMostOne)
 
   # Match to text
   pn.match("904-867-5309") # True
     
   # Or get the regex pattern itself, if desired
   pn_regex = pn.regex()
+  re.match(pn_regex, "904-867-5309")
 
   # Use a pattern to build something more complicated
   three_phone_numbers = (pn + " ") * 3

@@ -1,13 +1,13 @@
 from dataclasses import dataclass
 from typing import Union
-from readyregex.object_model.character import Character
-from readyregex.object_model.character_set_item import CharacterSetItem
-from readyregex.object_model.choice import Choice
-from readyregex.object_model.options import Options
-from readyregex.object_model.pattern import Pattern
-from readyregex.object_model.character_set import CharacterSet
-from readyregex.object_model.options import Repetitions
-from readyregex.object_model.regex_literal import RegexLiteral
+from .character import Character
+from .character_set_item import CharacterSetItem
+from .pattern import Choice
+from .options import Options
+from .pattern import Pattern
+from .character_set import CharacterSet
+from .options import Repetitions
+from .regex_literal import RegexLiteral
 
 @dataclass
 class SeparatorPattern(Pattern):

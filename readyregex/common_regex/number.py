@@ -1,13 +1,21 @@
 from dataclasses import dataclass, field
-from readyregex.object_model.concatenatable_mixin import ConcatenatableMixin
-from readyregex.object_model.pattern import Pattern
-from readyregex.object_model.options import Options
+from decimal import Decimal
+from enum import Enum, Flag
+from ..object_model.pattern import *
+from ..object_model.options import *
 
+class NumberType(Enum):
+    Any = 0
+    Whole = 1
+    Decimal = 2
+    Scientific = 4
+    eNotation = 8
 
 @dataclass
-class Number(Pattern, ConcatenatableMixin):
+class Number(Pattern):
 
-    options: Options = Options.Default
+    number_type : NumberType
+    negative_sign : Options
 
     def build(self):
 

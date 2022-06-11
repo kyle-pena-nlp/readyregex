@@ -1,12 +1,15 @@
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
-from typing import Iterable, Union, Tuple, Optional
+from dataclasses import dataclass, field, fields
+from collections import defaultdict
+from typing import Iterable, Union, Tuple, Optional, List, Dict
 import re, logging
 from .type_hint_validation_mixin import TypeHintValidationMixin
 from ..ready_regex_exception import ReadyRegexException
 from .options import Options, Repetitions
 
 # Thought:  Separate regex method into a build() -> Pattern and regex() -> str method?
+
+
 
 @dataclass
 class Pattern(ABC, TypeHintValidationMixin):
@@ -15,18 +18,28 @@ class Pattern(ABC, TypeHintValidationMixin):
         self._validate_types()
         self._validate_input()        
 
+    # Can be overriden
     def _validate_input(self):
         pass
-    
+
+    # Can be overriden
     def build(self):
         return self
 
+    # Can be overriden
     def simplify(self):
         return self
     
+    # Can be (but probably shouldn't be) overriden
     def regex(self):
         return self.build().simplify().regex()
-    
+
+    def debug(self, msg, *args):
+        # logging.debug does not do new-style formatting, so we have to do it ourselves
+        msg = msg.format(*args)
+        msg = "(In {}) ".format(type(self)) + msg
+        logging.debug(msg)
+
     def match(self, string):
         regex_string = self.regex()
         self.debug("regex_string: {}, string: {}", regex_string, string)
@@ -37,14 +50,15 @@ class Pattern(ABC, TypeHintValidationMixin):
         regex_string = "^{}$".format(regex_string)
         self.debug("regex_string: {}, string: {}", regex_string, string)       
         return re.match(regex_string, string)      
-    
-    def debug(self, msg, *args):
-        # logging.debug does not do new-style formatting, so we have to do it ourselves
-        msg = msg.format(*args)
-        msg = "(In {}) ".format(type(self)) + msg
-        logging.debug(msg)
 
+    def findall(self, string):
+        return re.findall(self.regex(), string)
 
+    def finditer(self, string):
+        return re.finditer(self.regex(), string)
+
+    def withname(self, name):
+        return NamedCapturingGroup(name, self)
 
     def join(self, others : Iterable[Union['Pattern',str]]) -> 'Pattern':
         parts = []
@@ -104,6 +118,40 @@ class Pattern(ABC, TypeHintValidationMixin):
             choices.append(StringLiteral(other))
         return Choice(choices)
 
+    def expected_match(self, string):
+        EXPECTED_MATCHES[id(self)].append(string)
+
+    def expected_nonmatch(self, string):
+        EXPECTED_NONMATCHES[id(self)].append(string)
+
+    def test(self, visited = None):
+        self_id = id(self)
+        visited = visited or set()
+        for expected_match in EXPECTED_MATCHES[self_id]:
+            assert self.match(expected_match)
+        for expected_nonmatch in EXPECTED_NONMATCHES[self_id]:
+            assert not self.match(expected_nonmatch)
+        visited.add(self_id)
+        for field in fields(self):
+            field_value = getattr(self, field.name)
+            field_value_id = id(field_value)
+            if field_value_id in visited:
+                continue
+            if not isinstance(field_value, Pattern):
+                continue
+            field_value.test(visited = visited)
+
+    def issue_url(self):
+        raise Exception("todo - CLI - Generate issue URL and formatted content")
+
+
+# Unfortunately I could not store these on the object itself because I cannot have fields with default values in the parent class
+# So, I simulate object storage with this awfulness
+EXPECTED_MATCHES : Dict[int,List[str]] = defaultdict(lambda: [])
+EXPECTED_NONMATCHES : Dict[int,List[str]] = defaultdict(lambda: [])
+            
+
+
 @dataclass
 class PatternSequence(Pattern):
     
@@ -111,6 +159,7 @@ class PatternSequence(Pattern):
 
     def regex(self):
         return "".join(item.regex() for item in self.items)
+
 
 @dataclass
 class Repetition(Pattern):
@@ -187,3 +236,21 @@ class Choice(Pattern):
 
     def regex(self):
         return "({})".format("|".join("({})".format(choice.regex()) for choice in self.choices))
+
+
+@dataclass
+class NamedCapturingGroup(Pattern):
+    name : str
+    content : Pattern
+
+    def __post_init__(self):
+        if len(self.name) == 0:
+            raise ReadyRegexException("name must have at least one character")
+        elif self.name[0].isalpha():
+            raise ReadyRegexException("name must start with a letter, was '{}'".format(self.name))
+        elif self.name.isalnum():
+            raise ReadyRegexException("name must consist solely of alphanumeric characters, was '{}'".format(self.name))
+        self._validate_types()
+
+    def regex(self):
+        return "(?P<{}>{})".format(self.name, self.content.regex())

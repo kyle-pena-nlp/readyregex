@@ -17,7 +17,7 @@ def test_A(A):
 def unicode_character():
     return Character("Æ")
 
-def test_unicode_character(unicode_character):
+def test_unicode_character(unicode_character : Pattern):
     unicode_character.match_whole_string("Æ")
 
 def test_fails_not_single_character():

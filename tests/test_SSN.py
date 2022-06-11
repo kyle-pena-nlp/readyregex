@@ -15,8 +15,13 @@ def test_basic_SSN(basic_SSN):
     assert not basic_SSN.match_whole_string("1")
 
 @pytest.fixture
-def basic_SSN_with_whitespace_ignored():
-    return SSN(extra_spaces = )
+def basic_SSN_with_single_space_ignored():
+    return SSN(extra_spaces = Repetitions.AtMostOne)
 
-def test_with_spaces(basic_SSN_with_whitespace_ignored):
-    assert basic_SSN_with_whitespace_ignored.match_whole_string("123- 45 -  7890")
+def test_with_single_spaces(basic_SSN_with_single_space_ignored):
+    assert basic_SSN_with_single_space_ignored.match_whole_string("123-45-7890")
+    assert basic_SSN_with_single_space_ignored.match_whole_string("123- 45-7890")
+    assert basic_SSN_with_single_space_ignored.match_whole_string("123 -45-7890")
+    assert basic_SSN_with_single_space_ignored.match_whole_string("123-45 -7890")
+    assert basic_SSN_with_single_space_ignored.match_whole_string("123-45- 7890")
+    assert basic_SSN_with_single_space_ignored.match_whole_string("123-45 - 7890")    
