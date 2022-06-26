@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 
 setup_requirements = ['pytest-runner', ]
 
-with open("test-requirements.txt") as f:
+with open("requirements_dev.txt") as f:
     tests_require = [ req.strip() for req in f.readlines() ]
 
 with open("requirements.txt") as f:
