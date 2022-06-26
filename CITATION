@@ -1,0 +1,16 @@
+NOTE: Change "x.y" by the version you use. If you are unsure about which version
+you are using run: `pip show readyregex` or `conda list readyregex`
+
+Text:
+
+[readyregex] readyregex x.y, 2022
+Pena et al., https://github.com/kyle-pena-nlp/readyregex
+
+BibTeX:
+
+@misc{pytestx.y,
+  title =        {readyregex x.y},
+  author = {Pena et al.},
+  year =         {2022},
+  url = {https://github.com/kyle-pena-nlp/readyregex},
+}
