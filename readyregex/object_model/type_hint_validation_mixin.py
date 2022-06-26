@@ -1,6 +1,16 @@
 from dataclasses import dataclass, fields
-import typeguard
 from ..ready_regex_exception import ReadyRegexException
+
+
+try:
+    # This library is installed in test / dev builds
+    import typeguard
+except:
+    # We fake out typeguard to support zero-dependency installs in non-dev / non-test builds
+    class typeguard:
+        @staticmethod
+        def check_type(field_name, attr, field_type):
+            return True
 
 @dataclass
 class TypeHintValidationMixin:
