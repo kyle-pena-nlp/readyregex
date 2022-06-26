@@ -5,12 +5,8 @@
 from setuptools import setup, find_packages
 
 setup_requirements = []
-
-with open("requirements_dev.txt") as f:
-    tests_require = [ req.strip() for req in f.readlines() ]
-
-with open("requirements.txt") as f:
-    install_requires = [ req.strip() for req in f.readlines() ]
+install_requires = []
+tests_require = [ 'typeguard >= 2.11.1', 'flake8', 'pytest' ]
 
 setup(
     author="Kyle Alexander Pena",
