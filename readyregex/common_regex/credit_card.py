@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from enum import Enum, Flag
-from ..object_model.pattern import *
+from enum import Flag
+from ..object_model.pattern import Pattern, Choice
 from ..object_model.options import Repetitions
 
 class CreditCardType(Flag):
@@ -9,8 +9,6 @@ class CreditCardType(Flag):
     MasterCard = 2
     AmericanExpress = 4
     DiscoverCard = 8
-
-
 
 @dataclass
 class CreditCard(Pattern):
@@ -27,12 +25,7 @@ class CreditCard(Pattern):
 
         raise Exception("TODO")
 
-        return Choice(choices)
-
-
-
-
-        
+        return Choice(choices)        
     
     def _card_type(self):
         if self.card_type == CreditCardType.Any:

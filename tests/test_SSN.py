@@ -4,7 +4,7 @@
 
 import pytest
 
-from readyregex import *
+from readyregex import SSN, Repetitions
 
 @pytest.fixture
 def basic_SSN():

@@ -4,7 +4,7 @@
 
 import pytest
 
-from readyregex import *
+from readyregex import Digits, ReadyRegexException
 
 @pytest.fixture
 def no_digits():

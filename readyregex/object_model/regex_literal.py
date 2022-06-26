@@ -1,7 +1,5 @@
 import re
 from dataclasses import dataclass
-
-from .pattern import Pattern
 from .pattern import Pattern
 from ..ready_regex_exception import ReadyRegexException
 

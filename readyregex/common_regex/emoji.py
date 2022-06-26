@@ -1,7 +1,5 @@
-from dataclasses import dataclass, field
-from ..object_model.pattern import *
-from ..object_model.options import *
-
+from dataclasses import dataclass
+from ..object_model.pattern import Pattern
 
 @dataclass
 class Emoji(Pattern):

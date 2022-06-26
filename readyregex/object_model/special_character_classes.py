@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from enum import Enum
 from .character_set_item import CharacterSetItem
 from .pattern import Pattern
 

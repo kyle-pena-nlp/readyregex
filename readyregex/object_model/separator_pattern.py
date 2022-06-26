@@ -7,7 +7,6 @@ from .options import Options
 from .pattern import Pattern
 from .character_set import CharacterSet
 from .options import Repetitions
-from .regex_literal import RegexLiteral
 
 @dataclass
 class SeparatorPattern(Pattern):

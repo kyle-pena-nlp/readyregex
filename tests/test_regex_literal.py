@@ -4,7 +4,7 @@
 
 import pytest
 
-from readyregex import *
+from readyregex import RegexLiteral
 
 @pytest.fixture
 def literal_pattern():

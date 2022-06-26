@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-from ..object_model.pattern import *
-from ..object_model.options import *
-from enum import Enum, Flag
+from ..object_model.pattern import Pattern
+from ..object_model.options import Options
+from enum import Enum
 
 """
     Intrepid reader -

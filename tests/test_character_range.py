@@ -4,7 +4,7 @@
 
 import pytest
 
-from readyregex import *
+from readyregex import Range, ReadyRegexException
 
 @pytest.fixture
 def A_Z_range_pattern():

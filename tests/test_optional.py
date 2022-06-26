@@ -4,7 +4,7 @@
 
 import pytest
 
-from readyregex import *
+from readyregex import Optional, EmptyPattern, Character
 
 @pytest.fixture
 def optional_empty():

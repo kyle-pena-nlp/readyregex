@@ -4,8 +4,7 @@
 
 import pytest
 
-from readyregex import *
-from readyregex.object_model.pattern import Repetition
+from readyregex import Repetition, Character, ReadyRegexException, RegexLiteral
 
 @pytest.fixture
 def kleene_star_init_using_Character():

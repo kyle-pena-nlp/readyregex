@@ -4,7 +4,7 @@
 
 import pytest
 
-from readyregex import *
+from readyregex import Pattern, Character, CharacterSet, Range, SpecialCharacterClasses
 
 @pytest.fixture
 def A():

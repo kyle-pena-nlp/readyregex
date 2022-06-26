@@ -1,8 +1,7 @@
-from dataclasses import dataclass, field
-from decimal import Decimal
-from enum import Enum, Flag
-from ..object_model.pattern import *
-from ..object_model.options import *
+from dataclasses import dataclass
+from enum import Enum
+from ..object_model.pattern import Pattern
+from ..object_model.options import Options
 
 class NumberType(Enum):
     Any = 0

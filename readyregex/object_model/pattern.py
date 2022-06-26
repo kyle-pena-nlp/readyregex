@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from dataclasses import dataclass, field, fields
 from collections import defaultdict
 from typing import Iterable, Union, Tuple, Optional, List, Dict
@@ -6,10 +6,6 @@ import re, logging
 from .type_hint_validation_mixin import TypeHintValidationMixin
 from ..ready_regex_exception import ReadyRegexException
 from .options import Options, Repetitions
-
-# Thought:  Separate regex method into a build() -> Pattern and regex() -> str method?
-
-
 
 @dataclass
 class Pattern(ABC, TypeHintValidationMixin):
@@ -90,9 +86,6 @@ class Pattern(ABC, TypeHintValidationMixin):
         return self.add(other)      
 
     def __mul__(self, spec : Union[Options, Repetitions, int, Tuple[Optional[int],Optional[int]]]):
-        
-        LB = None
-        UB = None
 
         if isinstance(spec, Options):
             spec = spec.to_rep_spec()
@@ -132,8 +125,8 @@ class Pattern(ABC, TypeHintValidationMixin):
         for expected_nonmatch in EXPECTED_NONMATCHES[self_id]:
             assert not self.match(expected_nonmatch)
         visited.add(self_id)
-        for field in fields(self):
-            field_value = getattr(self, field.name)
+        for field_ in fields(self):
+            field_value = getattr(self, field_.name)
             field_value_id = id(field_value)
             if field_value_id in visited:
                 continue

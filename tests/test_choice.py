@@ -4,7 +4,7 @@
 
 import pytest
 
-from readyregex import *
+from readyregex import Choice, StringLiteral, Pattern
 
 @pytest.fixture
 def simple_choice():

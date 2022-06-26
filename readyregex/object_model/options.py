@@ -2,8 +2,6 @@ import enum
 
 # I don't use enum.auto() because I worry about hard to detect cross-version pickling stability problems
 
-
-
 class Options(enum.Enum):
     Mandatory    = 1
     Optional     = 2

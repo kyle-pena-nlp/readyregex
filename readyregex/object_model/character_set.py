@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Sequence, Union, List
+from typing import Union, List
 from .character_set_item import CharacterSetItem
 from .character import Character
 from .pattern import Pattern

@@ -4,7 +4,7 @@
 
 import pytest
 
-from readyregex import *
+from readyregex import Zipcode
 
 @pytest.fixture
 def default_zipcode():

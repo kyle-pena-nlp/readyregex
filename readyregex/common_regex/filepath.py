@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum, Flag
-from ..object_model.pattern import *
+from ..object_model.pattern import Pattern
 
 class FilepathType(Enum):
     Windows = 1

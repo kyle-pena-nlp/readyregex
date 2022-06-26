@@ -9,6 +9,7 @@ from .html_tag import HtmlTag, HtmlTagTypes
 from .ip_address import IPAddress, IPAddressType
 from .number import Number, NumberType
 from .passport_number import PassportNumber
+from .phone_number import PhoneNumber
 from .password import Password, PasswordRequirements
 from .slug import Slug
 from .ssn import SSN

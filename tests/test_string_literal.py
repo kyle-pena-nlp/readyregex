@@ -4,7 +4,7 @@
 
 import pytest
 
-from readyregex import *
+from readyregex import StringLiteral
 
 @pytest.fixture
 def empty_string_literal():

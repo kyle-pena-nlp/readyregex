@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from ..object_model.pattern import *
-from ..object_model.options import *
+from ..object_model.pattern import Pattern, StringLiteral, Choice
+from ..object_model.options import Options, Repetitions
 from ..object_model.character import Character
 from ..object_model.separator_pattern import SeparatorPattern
 from ..object_model.digits import Digits

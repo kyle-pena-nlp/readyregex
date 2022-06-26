@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from enum import Flag
 from typing import Optional
-from ..object_model.pattern import *
+from ..object_model.pattern import Pattern
 
 class PasswordRequirements(Flag):
     SpecialCharacter = 1

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from enum import Flag
-from ..object_model.pattern import *
+from ..object_model.pattern import Pattern
 
 class IPAddressType(Flag):
     Any = 0
