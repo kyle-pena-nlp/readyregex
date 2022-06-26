@@ -1,3 +1,2 @@
-pytest>=3
 typeguard >= 2.11.1
 flake8
