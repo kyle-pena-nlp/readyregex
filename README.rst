@@ -8,6 +8,8 @@
 Welcome to readyregex's documentation!
 ======================================
 
+**WARNING**: *``readyregex`` is in pre-alpha, which means it's not ready for use just yet!*
+
 **readyregex** is a Python library which offers a large number of off-the-shelf, customizable text matching patterns for everyday use.
 
 These patterns include:
